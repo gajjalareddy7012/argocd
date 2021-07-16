@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javawebappdp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: javawebapp
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: javawebapppod
+      labels:
+        app: javawebapp
+    spec:
+      containers:
+      - name: javawebappcontainer
+        image: gajjala7012/java-web-app:15
+        ports:
+        - containerPort: 8080
